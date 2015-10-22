@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<title>Butterfly_00.m</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="generator" content="highlight.m &copy; 2003 Guillaume Flandin">
+<style type="text/css">
+  .comment {color: #228B22;}
+  .string {color: #CC00FF;}
+  .keyword {color: #0000FF;}
+  .cont {color: #0000FF;}
+  .code {color: #000000;}
+</style>
+</head>
+<body>
+<pre class="mcode">0001 <span class="comment">%% To animate the Flight of Butterfly -------------------------------------</span>
+0002 <span class="comment">%-------------------------------------------------------------------------%</span>
+0003 <span class="comment">% Code written by : Martin Josemaria Vuelta Rojas                         %</span>
+0004 <span class="comment">%                   Universidad Nacional Mayor de San Masrcos             %</span>
+0005 <span class="comment">%                   Facultad de Ciencias fisicas                          %</span>
+0006 <span class="comment">%                   Seminario Permanente de astronomia y                  %</span>
+0007 <span class="comment">%                   ciencias espaciales                                   %</span>
+0008 <span class="comment">%                   Peru                                                  %</span>
+0009 <span class="comment">% E-mail : physics.mvr@hotmail.com                                        %</span>
+0010 <span class="comment">%-------------------------------------------------------------------------%</span>
+0011 
+0012 <span class="comment">%% Clean al spaces --------------------------------------------------------</span>
+0013 clear all
+0014 clc
+0015 
+0016 <span class="comment">%% Basic data -------------------------------------------------------------</span>
+0017 N = 5000;
+0018 n = 500;
+0019 t = linspace(0,20*pi,N);
+0020 x = sin(t).*(exp(cos(t))-2*cos(4*t)+sin(t/12).^5);
+0021 y = cos(t).*(exp(cos(t))-2*cos(4*t)+sin(t/12).^5);
+0022 
+0023 x = x./max(abs(x)) ;
+0024 y = y./max(abs(y)) ;
+0025 
+0026 tim = linspace(0,30,n);
+0027 fre = 20;
+0028 
+0029 rtx = zeros(1,N);
+0030 rty = zeros(1,N);
+0031 rtz = zeros(1,N);
+0032 
+0033 <span class="comment">%% Preparing the images ---------------------------------------------------</span>
+0034 Fly = figure (<span class="string">'Name'</span>,<span class="string">'Butterfly'</span>,<span class="cont">...</span>
+0035               <span class="string">'NumberTitle'</span>,<span class="string">'off'</span>,<span class="cont">...</span>
+0036               <span class="string">'Color'</span>, <span class="string">'k'</span>,<span class="cont">...</span>
+0037               <span class="string">'Menubar'</span>,<span class="string">'none'</span>,<span class="cont">...</span>
+0038               <span class="string">'Position'</span>,[20 200 1300 400]);
+0039 
+0040 axes1 = axes(<span class="string">'Parent'</span>,Fly,<span class="cont">...</span>
+0041              <span class="string">'DataAspectRatio'</span>,[1 1 1],<span class="cont">...</span>
+0042              <span class="string">'Xlim'</span>,[-3 3],<span class="cont">...</span>
+0043              <span class="string">'Ylim'</span>,[-1.5 31],<span class="cont">...</span>
+0044              <span class="string">'Zlim'</span>,[-1.5 1.5],<span class="cont">...</span>
+0045              <span class="string">'View'</span>,[108 8]);
+0046 
+0047 axis off;
+0048 
+0049 hold(axes1,<span class="string">'all'</span>);
+0050 
+0051 B_Fly1 = plot3(rtx,rty,rtz,<span class="string">'Color'</span>,<span class="string">'m'</span>);
+0052 B_Fly2 = plot3(rtx,rty,rtz,<span class="string">'Color'</span>,<span class="string">'m'</span>);
+0053 
+0054 stop = uicontrol(<span class="string">'style'</span>,<span class="string">'toggle'</span>,<span class="cont">...</span>
+0055                  <span class="string">'string'</span>,<span class="string">'Detener'</span>,<span class="cont">...</span>
+0056                  <span class="string">'background'</span>,<span class="string">'white'</span>);
+0057 
+0058 ph = pi/3;
+0059 a  = 1;
+0060 x1 = x;
+0061 y1 = y;
+0062 c1 = a*0.5*rand(size(tim)).*sin(tim) + <span class="cont">...</span>
+0063      a*0.5*rand(size(tim)).*cos(tim).*sin(tim);
+0064 
+0065 x2 = x;
+0066 y2 = max(tim)*ones(1,N)-y;
+0067 c2 = a*0.5*rand(size(tim)).*cos(tim) - <span class="cont">...</span>
+0068      a*0.5*rand(size(tim)).*sin(tim).*cos(tim);
+0069 
+0070 <span class="comment">%% Drawinq the fly --------------------------------------------------------</span>
+0071 <span class="keyword">while</span> ~get(stop,<span class="string">'value'</span>)
+0072     <span class="keyword">for</span> j = 1:n
+0073         rtx = x1*cos(fre*tim(j))+2*a*sin((fre/3)*tim(j))+c2(j);
+0074         rty = y1+a*tim(j);
+0075         rtz = abs(x1)*sin(fre*tim(j)) + c1(j);
+0076         
+0077         set(B_Fly1,<span class="string">'XData'</span>,rtx,<span class="string">'YData'</span>,rty,<span class="string">'ZData'</span>,rtz);
+0078         
+0079         rtx = x2*cos(fre*tim(j))-2*a*sin((fre/5)*tim(j))+ c1(j);
+0080         rty = y2-a*tim(j);
+0081         rtz = abs(x2)*sin(fre*tim(j)) + c2(j);
+0082         
+0083         set(B_Fly2,<span class="string">'XData'</span>,rtx,<span class="string">'YData'</span>,rty,<span class="string">'ZData'</span>,rtz);
+0084         
+0085         drawnow
+0086         
+0087         <span class="keyword">if</span> get(stop,<span class="string">'value'</span>)==1
+0088             <span class="keyword">break</span>
+0089         <span class="keyword">end</span>
+0090     <span class="keyword">end</span>
+0091     
+0092     y2 = y;
+0093     y1 = max(tim)*ones(1,N)-y;
+0094     a = -a;
+0095 <span class="keyword">end</span>
+0096 
+0097 set(stop,<span class="cont">...</span>
+0098     <span class="string">'Style'</span>,<span class="string">'pushbutton'</span>,<span class="cont">...</span>
+0099     <span class="string">'String'</span>,<span class="string">'Cerrar'</span>,<span class="cont">...</span>
+0100     <span class="string">'Callback'</span>,<span class="string">'close(gcf)'</span>);
+</pre>
+
+</body>
+</html>

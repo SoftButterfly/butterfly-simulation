@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<title>Butterfly_02.m</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="generator" content="highlight.m &copy; 2003 Guillaume Flandin">
+<style type="text/css">
+  .comment {color: #228B22;}
+  .string {color: #CC00FF;}
+  .keyword {color: #0000FF;}
+  .cont {color: #0000FF;}
+  .code {color: #000000;}
+</style>
+</head>
+<body>
+<pre class="mcode">0001 <span class="comment">%% To animate the Flight of Butterfly -------------------------------------</span>
+0002 <span class="comment">%-------------------------------------------------------------------------%</span>
+0003 <span class="comment">% Code written by : Martin Josemaria vuelta rojas                         %</span>
+0004 <span class="comment">%                   Universidad Nacional Mayor de San Masrcos             %</span>
+0005 <span class="comment">%                   Facultad de Ciencias fisicas                          %</span>
+0006 <span class="comment">%                   Seminario Permanente de astronomia y                  %</span>
+0007 <span class="comment">%                   ciencias espaciales                                   %</span>
+0008 <span class="comment">%                   Peru                                                  %</span>
+0009 <span class="comment">% E-mail : physics.mvr@hotmail.com                                        %</span>
+0010 <span class="comment">%-------------------------------------------------------------------------%</span>
+0011 <span class="comment">%% Rotando las alas de la mariposa-----------------------------------------</span>
+0012 <span class="comment">%  Lipiando los espacios</span>
+0013 clear all
+0014 close all
+0015 clc
+0016 
+0017 <span class="comment">% Curva de la mariposa</span>
+0018 N = 50000;
+0019 t = linspace(0,20*pi,N);
+0020 x = sin(t).*(exp(cos(t))-2*cos(4*t)+sin(t/12).^5);
+0021 y = cos(t).*(exp(cos(t))-2*cos(4*t)+sin(t/12).^5);
+0022 x = x./max(abs(x)) ;
+0023 y = y./max(abs(y)) ;
+0024 
+0025 <span class="comment">%  Rotación 1</span>
+0026 the  = 0;
+0027 z_al1 = abs(x)*sin(the);
+0028 x_al1 = x*cos(the);
+0029 y_al1 = y;
+0030 
+0031 Buterfly1 = figure (<span class="string">'Name'</span>,<span class="string">'Butterfly - Rotación 0'</span>,<span class="cont">...</span>
+0032                     <span class="string">'NumberTitle'</span>,<span class="string">'off'</span>,<span class="cont">...</span>
+0033                     <span class="string">'Color'</span>, <span class="string">'w'</span>,<span class="cont">...</span>
+0034                     <span class="string">'Menubar'</span>,<span class="string">'none'</span>);
+0035 
+0036 Axesfly1 = axes(<span class="string">'Parent'</span>,Buterfly1,<span class="cont">...</span>
+0037                 <span class="string">'DataAspectRatio'</span>,[1 1 1],<span class="cont">...</span>
+0038                 <span class="string">'View'</span>,[160 15],<span class="cont">...</span>
+0039                 <span class="string">'Xlim'</span>,[-1 1],<span class="cont">...</span>
+0040                 <span class="string">'Ylim'</span>,[-1 1],<span class="cont">...</span>
+0041                 <span class="string">'Zlim'</span>,[-1 1]);
+0042             
+0043 hold(Axesfly1,<span class="string">'all'</span>);
+0044 
+0045 plot3(x_al1,y_al1,z_al1,<span class="string">'r'</span>);
+0046 
+0047 grid on;
+0048 
+0049 title({<span class="string">'$\bf Butterfly:\ Rotacion\ 1\ (\theta=0\ rad)$'</span>},<span class="cont">...</span>
+0050       <span class="string">'Interpreter'</span>, <span class="string">'Latex'</span>,<span class="cont">...</span>
+0051       <span class="string">'Color'</span>,<span class="string">'k'</span>,<span class="cont">...</span>
+0052       <span class="string">'HorizontalAlignment'</span>,<span class="string">'center'</span>,<span class="cont">...</span>
+0053       <span class="string">'FontSize'</span>,14);
+0054 
+0055 <span class="comment">%  Rotación 2</span>
+0056 the  = pi/4;
+0057 z_al2 = abs(x)*sin(the);
+0058 x_al2 = x*cos(the);
+0059 y_al2 = y;
+0060 
+0061 Buterfly2 = figure (<span class="string">'Name'</span>,<span class="string">'Butterfly - Rotación 2'</span>,<span class="cont">...</span>
+0062                     <span class="string">'NumberTitle'</span>,<span class="string">'off'</span>,<span class="cont">...</span>
+0063                     <span class="string">'Color'</span>, <span class="string">'w'</span>,<span class="cont">...</span>
+0064                     <span class="string">'Menubar'</span>,<span class="string">'none'</span>);
+0065 
+0066 Axesfly2 = axes(<span class="string">'Parent'</span>,Buterfly2,<span class="cont">...</span>
+0067                 <span class="string">'DataAspectRatio'</span>,[1 1 1],<span class="cont">...</span>
+0068                 <span class="string">'View'</span>,[160 15],<span class="cont">...</span>
+0069                 <span class="string">'Xlim'</span>,[-1 1],<span class="cont">...</span>
+0070                 <span class="string">'Ylim'</span>,[-1 1],<span class="cont">...</span>
+0071                 <span class="string">'Zlim'</span>,[-1 1]);
+0072             
+0073 hold(Axesfly2,<span class="string">'all'</span>);
+0074 
+0075 plot3(x_al2,y_al2,z_al2,<span class="string">'g'</span>);
+0076 
+0077 grid on;
+0078 
+0079 title(<span class="string">'$\bf Butterfly:\ Rotacion\ 2\ (\theta=\frac{\pi}{4}\ rad)$'</span>,<span class="cont">...</span>
+0080       <span class="string">'Interpreter'</span>, <span class="string">'Latex'</span>,<span class="cont">...</span>
+0081       <span class="string">'Color'</span>,<span class="string">'k'</span>,<span class="cont">...</span>
+0082       <span class="string">'HorizontalAlignment'</span>,<span class="string">'center'</span>,<span class="cont">...</span>
+0083       <span class="string">'FontSize'</span>,14);
+0084 
+0085 <span class="comment">%  Rotación 3</span>
+0086 the  = -pi/3;
+0087 z_al3 = abs(x)*sin(the);
+0088 x_al3 = x*cos(the);
+0089 y_al3 = y;
+0090 
+0091 Buterfly3 = figure (<span class="string">'Name'</span>,<span class="string">'Butterfly - Rotación 3'</span>,<span class="cont">...</span>
+0092                     <span class="string">'NumberTitle'</span>,<span class="string">'off'</span>,<span class="cont">...</span>
+0093                     <span class="string">'Color'</span>, <span class="string">'w'</span>,<span class="cont">...</span>
+0094                     <span class="string">'Menubar'</span>,<span class="string">'none'</span>);
+0095 
+0096 Axesfly3 = axes(<span class="string">'Parent'</span>,Buterfly3,<span class="cont">...</span>
+0097                 <span class="string">'DataAspectRatio'</span>,[1 1 1],<span class="cont">...</span>
+0098                 <span class="string">'View'</span>,[160 15],<span class="cont">...</span>
+0099                 <span class="string">'Xlim'</span>,[-1 1],<span class="cont">...</span>
+0100                 <span class="string">'Ylim'</span>,[-1 1],<span class="cont">...</span>
+0101                 <span class="string">'Zlim'</span>,[-1 1]);
+0102             
+0103 hold(Axesfly3,<span class="string">'all'</span>);
+0104 
+0105 plot3(x_al3,y_al3,z_al3,<span class="string">'b'</span>);
+0106 
+0107 grid on;
+0108 
+0109 title(<span class="string">'$\bf Butterfly:\ Rotacion\ 3\ (\theta=-\frac{\pi}{3}\ rad)$'</span>,<span class="cont">...</span>
+0110       <span class="string">'Interpreter'</span>, <span class="string">'Latex'</span>,<span class="cont">...</span>
+0111       <span class="string">'Color'</span>,<span class="string">'k'</span>,<span class="cont">...</span>
+0112       <span class="string">'HorizontalAlignment'</span>,<span class="string">'center'</span>,<span class="cont">...</span>
+0113       <span class="string">'FontSize'</span>,14);
+0114 
+0115 <span class="comment">%  Vista conjunta</span>
+0116 Buterfly4 = figure (<span class="string">'Name'</span>,<span class="string">'Butterfly - Vista Conjunta'</span>,<span class="cont">...</span>
+0117                     <span class="string">'NumberTitle'</span>,<span class="string">'off'</span>,<span class="cont">...</span>
+0118                     <span class="string">'Color'</span>, <span class="string">'w'</span>,<span class="cont">...</span>
+0119                     <span class="string">'Menubar'</span>,<span class="string">'none'</span>);
+0120 
+0121 Axesfly4 = axes(<span class="string">'Parent'</span>,Buterfly4,<span class="cont">...</span>
+0122                 <span class="string">'DataAspectRatio'</span>,[1 1 1],<span class="cont">...</span>
+0123                 <span class="string">'View'</span>,[160 15],<span class="cont">...</span>
+0124                 <span class="string">'Xlim'</span>,[-1 1],<span class="cont">...</span>
+0125                 <span class="string">'Ylim'</span>,[-1 1],<span class="cont">...</span>
+0126                 <span class="string">'Zlim'</span>,[-1 1]);
+0127 
+0128 hold(Axesfly4,<span class="string">'all'</span>);
+0129 
+0130 plot3(x_al2,y_al2,z_al2,<span class="string">'g'</span>,<span class="cont">...</span>
+0131       x_al1,y_al1,z_al1,<span class="string">'r'</span>,<span class="cont">...</span>
+0132       x_al3,y_al3,z_al3,<span class="string">'b'</span>);
+0133 
+0134 grid on;
+0135 
+0136 title(<span class="string">'$\bf Butterfly:\ Vista\ conjunta$'</span>,<span class="cont">...</span>
+0137       <span class="string">'Interpreter'</span>, <span class="string">'Latex'</span>,<span class="cont">...</span>
+0138       <span class="string">'Color'</span>,<span class="string">'k'</span>,<span class="cont">...</span>
+0139       <span class="string">'HorizontalAlignment'</span>,<span class="string">'center'</span>,<span class="cont">...</span>
+0140       <span class="string">'FontSize'</span>,14);
+</pre>
+
+</body>
+</html>

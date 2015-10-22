@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<title>Butterfly_03.m</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="generator" content="highlight.m &copy; 2003 Guillaume Flandin">
+<style type="text/css">
+  .comment {color: #228B22;}
+  .string {color: #CC00FF;}
+  .keyword {color: #0000FF;}
+  .cont {color: #0000FF;}
+  .code {color: #000000;}
+</style>
+</head>
+<body>
+<pre class="mcode">0001 <span class="comment">%% To animate the Flight of Butterfly -------------------------------------</span>
+0002 <span class="comment">%-------------------------------------------------------------------------%</span>
+0003 <span class="comment">% Code written by : Martin Josemaria vuelta rojas                         %</span>
+0004 <span class="comment">%                   Universidad Nacional Mayor de San Masrcos             %</span>
+0005 <span class="comment">%                   Facultad de Ciencias fisicas                          %</span>
+0006 <span class="comment">%                   Seminario Permanente de astronomia y                  %</span>
+0007 <span class="comment">%                   ciencias espaciales                                   %</span>
+0008 <span class="comment">%                   Peru                                                  %</span>
+0009 <span class="comment">% E-mail : physics.mvr@hotmail.com                                        %</span>
+0010 <span class="comment">%-------------------------------------------------------------------------%</span>
+0011 <span class="comment">%% Butterfly: Animación 1 -&gt; Aleteo ---------------------------------------</span>
+0012 <span class="comment">%  Lipiando los espacios</span>
+0013 clear all
+0014 close all
+0015 clc
+0016 
+0017 <span class="comment">% Curva de la mariposa</span>
+0018 N = 50000;
+0019 t = linspace(0,20*pi,N);
+0020 x = sin(t).*(exp(cos(t))-2*cos(4*t)+sin(t/12).^5);
+0021 y = cos(t).*(exp(cos(t))-2*cos(4*t)+sin(t/12).^5);
+0022 x = x./max(abs(x)) ;
+0023 y = y./max(abs(y)) ;
+0024 
+0025 <span class="comment">%  Aleteo de la maiposa</span>
+0026 n    = 5000;
+0027 frec = 40*pi;
+0028 time = linspace(0,5,n);
+0029 the  = (pi/3)*sin(frec*time);
+0030 x_al = x;
+0031 y_al = y;
+0032 z_al = zeros(size(x));
+0033 
+0034 <span class="comment">%  Propiedades de la animacion</span>
+0035 Buterfly = figure (<span class="string">'Name'</span>,<span class="string">'Butterfly - Animación 1'</span>,<span class="cont">...</span>
+0036                    <span class="string">'NumberTitle'</span>,<span class="string">'off'</span>,<span class="cont">...</span>
+0037                    <span class="string">'Color'</span>, <span class="string">'k'</span>,<span class="cont">...</span>
+0038                    <span class="string">'Menubar'</span>,<span class="string">'none'</span>);
+0039 
+0040 Axesfly = axes(<span class="string">'Parent'</span>,Buterfly,<span class="cont">...</span>
+0041                <span class="string">'DataAspectRatio'</span>,[1 1 1],<span class="cont">...</span>
+0042                <span class="string">'View'</span>,[55 310],<span class="cont">...</span>
+0043                <span class="string">'Xlim'</span>,[-1 1],<span class="cont">...</span>
+0044                <span class="string">'Ylim'</span>,[-1 1],<span class="cont">...</span>
+0045                <span class="string">'Zlim'</span>,[-1 1]);
+0046 axis off;
+0047 
+0048 hold(Axesfly,<span class="string">'all'</span>);
+0049 
+0050 stop = uicontrol(<span class="string">'style'</span>,<span class="string">'toggle'</span>,<span class="cont">...</span>
+0051                  <span class="string">'string'</span>,<span class="string">'Detener'</span>,<span class="cont">...</span>
+0052                  <span class="string">'background'</span>,<span class="string">'white'</span>,<span class="cont">...</span>
+0053                  <span class="string">'Position'</span>, [20 20 100 20]);
+0054 
+0055 Frame = plot3(x_al,y_al,z_al,<span class="string">'Color'</span>,<span class="string">'m'</span>);
+0056 
+0057 title({<span class="string">'Butterfly: Animación 1 (Aleteo)'</span>},<span class="cont">...</span>
+0058        <span class="string">'Color'</span>,<span class="string">'w'</span>,<span class="cont">...</span>
+0059        <span class="string">'HorizontalAlignment'</span>,<span class="string">'center'</span>,<span class="cont">...</span>
+0060        <span class="string">'FontSize'</span>,14);
+0061 
+0062 <span class="comment">%  Animación</span>
+0063 <span class="keyword">for</span> i=1:n
+0064     x_al = x.*cos(the(i));
+0065     y_al = y;
+0066     z_al = abs(x)*sin(the(i));
+0067     
+0068     set(Frame,<span class="cont">...</span>
+0069         <span class="string">'XData'</span>,x_al,<span class="cont">...</span>
+0070         <span class="string">'YData'</span>,y_al,<span class="cont">...</span>
+0071         <span class="string">'ZData'</span>,z_al);
+0072     
+0073     <span class="keyword">if</span> get(stop,<span class="string">'value'</span>)==0
+0074         <span class="keyword">if</span>(~mod(i,10))
+0075             drawnow;
+0076         <span class="keyword">end</span>
+0077     <span class="keyword">elseif</span> get(stop,<span class="string">'value'</span>)==1
+0078         <span class="keyword">break</span>
+0079     <span class="keyword">end</span>
+0080 <span class="keyword">end</span>
+0081 
+0082 set(stop,<span class="cont">...</span>
+0083     <span class="string">'style'</span>,<span class="string">'pushbutton'</span>,<span class="cont">...</span>
+0084     <span class="string">'string'</span>,<span class="string">'Cerrar'</span>,<span class="cont">...</span>
+0085     <span class="string">'callback'</span>,<span class="string">'close(Buterfly)'</span>);
+</pre>
+
+</body>
+</html>

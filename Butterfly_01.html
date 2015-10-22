@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<title>Butterfly_01.m</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="generator" content="highlight.m &copy; 2003 Guillaume Flandin">
+<style type="text/css">
+  .comment {color: #228B22;}
+  .string {color: #CC00FF;}
+  .keyword {color: #0000FF;}
+  .cont {color: #0000FF;}
+  .code {color: #000000;}
+</style>
+</head>
+<body>
+<pre class="mcode">0001 <span class="comment">%% To animate the Flight of Butterfly -------------------------------------</span>
+0002 <span class="comment">%-------------------------------------------------------------------------%</span>
+0003 <span class="comment">% Code written by : Martin Josemaria vuelta rojas                         %</span>
+0004 <span class="comment">%                   Universidad Nacional Mayor de San Masrcos             %</span>
+0005 <span class="comment">%                   Facultad de Ciencias fisicas                          %</span>
+0006 <span class="comment">%                   Seminario Permanente de astronomia y                  %</span>
+0007 <span class="comment">%                   ciencias espaciales                                   %</span>
+0008 <span class="comment">%                   Peru                                                  %</span>
+0009 <span class="comment">% E-mail : physics.mvr@hotmail.com                                        %</span>
+0010 <span class="comment">%-------------------------------------------------------------------------%</span>
+0011 <span class="comment">%% Graficando la curva de la mariposa--------------------------------------</span>
+0012 <span class="comment">%  Lipiando los espacios</span>
+0013 clear all
+0014 close all
+0015 clc
+0016 
+0017 <span class="comment">%  Curva de la mariposa</span>
+0018 N = 50000;
+0019 t = linspace(0,20*pi,N);
+0020 x = sin(t).*(exp(cos(t))-2*cos(4*t)+sin(t/12).^5);
+0021 y = cos(t).*(exp(cos(t))-2*cos(4*t)+sin(t/12).^5);
+0022 x = x./max(abs(x)) ;
+0023 y = y./max(abs(y)) ;
+0024 
+0025 Buterfly = figure (<span class="string">'Name'</span>,<span class="string">'Butterfly'</span>,<span class="cont">...</span>
+0026                    <span class="string">'NumberTitle'</span>,<span class="string">'off'</span>,<span class="cont">...</span>
+0027                    <span class="string">'Color'</span>, <span class="string">'k'</span>,<span class="cont">...</span>
+0028                    <span class="string">'Menubar'</span>,<span class="string">'none'</span>);
+0029 
+0030 Axesfly = axes(<span class="string">'Parent'</span>,Buterfly,<span class="cont">...</span>
+0031                <span class="string">'DataAspectRatio'</span>,[2 1.7 2],<span class="cont">...</span>
+0032                <span class="string">'Color'</span>,[0 0 0],<span class="cont">...</span>
+0033                <span class="string">'View'</span>,[0 90],<span class="cont">...</span>
+0034                <span class="string">'Xlim'</span>,[-1 1],<span class="cont">...</span>
+0035                <span class="string">'Ylim'</span>,[-0.7 1],<span class="cont">...</span>
+0036                <span class="string">'Zlim'</span>,[-1 1]);
+0037            
+0038 title(<span class="string">'Butterfly''s curve'</span>,<span class="cont">...</span>
+0039       <span class="string">'Color'</span>,<span class="string">'w'</span>,<span class="cont">...</span>
+0040       <span class="string">'FontSize'</span>,16);
+0041   
+0042 hold(Axesfly,<span class="string">'all'</span>);
+0043 
+0044 plot(x,y,<span class="string">'m'</span>);
+0045 
+0046 
+</pre>
+
+</body>
+</html>
